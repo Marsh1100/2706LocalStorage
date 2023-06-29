@@ -15,9 +15,50 @@
 <body>
 
   <h1>Carrito de compras</h1>
+  
+
+  <section class="tableProducts" id="table-products">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col" class="col-3">Producto</th>
+          <th scope="col" class="col-4">Descripción</th>
+          <th scope="col" class="col-2">Precio</th>
+          <th scope="col" class="col-3"> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td >
+            <img src="https://cdn-icons-png.flaticon.com/512/75/75472.png" class="imgProducts" alt="...">
+          </td>
+          <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, sit harum numquam tempora molestiae similique itaque unde, voluptatibus fugiat quia dicta ducimus nihil totam impedit laborum dolorem corporis, earum distinctio!</td>
+          <td> 10 </td>
+          <td>
+            <button type="button" class="btn btn-success">Agregar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Producto 2</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <td>Producto 3</td>
+          <td>@twitter</td>
+          <td>@twitter</td>
+  
+        </tr>
+      </tbody>
+    </table>
+  </section>
+ 
+
   <input type="text" id="compraInput" placeholder="Nueva compra">
   <button onclick="agregarAlCarrito()">Agregar al carrito</button>
-  <ul id="cartItems"></ul>
+  <ul id="cartItems">
+
+  </ul>
 
   <footer>©Margie Bocanegra</footer>
 
