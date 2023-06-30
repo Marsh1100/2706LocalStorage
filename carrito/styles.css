@@ -14,19 +14,56 @@ body{
   }
 
 .tableProducts{
-    margin: auto;
-    width: 80%;
-}
-.imgProducts{
-    height: 10vh;
-}
-footer {
-    margin-top: auto;
-    display: table;
-    width: 100%;
-    height: 2vh;
-    background-color: #000;
-    color:#fff;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 
+    width: 80%;
+    
+}
+
+.imgProducts{
+    height: 15vh;
+}
+td{
+    vertical-align: middle;
+    text-align: center;
+}
+.btnIncrementar{
+    display: flex;
+    justify-content: center;
+}
+#cantidad{
+    width: 30px;
+    height: 20px;
+    text-align: center;
+}
+#btn-menos,#btn-mas{
+    width: 30px;
+    height: 20px;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+}
+.carrito{
+    display: flex;
+    flex-direction: column;
+}
+
+
+footer {
+    color: white;
+    background-color: #4f0450;
+    width: 100%;
+    height: 5vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+   
 }
