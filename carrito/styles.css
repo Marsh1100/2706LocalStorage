@@ -11,16 +11,32 @@ body{
     flex-direction: column;
 
     background-color: rgb(236, 236, 236);
-  }
+}
+
+header{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 10px;
+
+    color: #4f0450;
+}
+
+main{
+    display: flex;
+}
 
 .tableProducts{
     margin-left: auto;
     margin-right: auto;
 
-    width: 80%;
+    width:50%;
     
 }
-
+.compra{
+    width: 50%;
+    background-color: #f7cbf8;
+}
 .imgProducts{
     height: 15vh;
 }

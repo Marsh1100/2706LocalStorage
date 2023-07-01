@@ -27,12 +27,10 @@ class ProductosAlmacen{
   }
 }
 
-class ProductoCarrito{
+class ProductoCarrito extends Producto{
   constructor(nombre,precio,cantidad){
-    this.nombre=nombre;
-    this.img=img;
-    this.descripcion=descripcion;
-    this.precio=precio;
+    super(nombre,precio);
+    this.cantidad=cantidad;
   }
 }
 
@@ -43,14 +41,14 @@ class CarritoDeCompras{
   }
   
   addProductoCarrito(producto){
-    this.productos.push(producto);
+    this.carrito.push(producto);
   }
   //
-  editCantProducto(index,producto){
-    this.productos.splice(index,1,producto);
+  editCantProducto(index,cantidad){
+    this.carrito[index].cantidad += cantidad
   }
   removeProducto(index){
-    this.productos.splice(index,1);
+    this.carrito.splice(index,1);
   }
 
   getProductosCarrito(){
@@ -59,6 +57,8 @@ class CarritoDeCompras{
 }
 
 const productosAlmacen = new ProductosAlmacen();
+const carritoDeCompras = new CarritoDeCompras();
+
 
 productosAlmacen.addProducto(new ProductoAlmacen("Tri Bot Robot de Aprendizaje",
 "https://pepeganga.vtexassets.com/arquivos/ids/666563/100343866-1.png?v=637737938490530000",
@@ -89,9 +89,9 @@ generarIdUnico = () => {
 } 
 function renderProductosTabla(){
   $productosTabla.innerHTML=" ";
-  const productos = productosAlmacen.getProductos();
+  const productosAlm = productosAlmacen.getProductos();
 
-  productos.forEach((e,index)=>{
+  productosAlm.forEach((e,index)=>{
     const {nombre,img,descripcion,precio} = e;
 
     let html = `<tr>
@@ -126,7 +126,7 @@ renderProductosTabla();
 
 function incrementar(index){
   let $cajaCantidad = document.getElementById(index);
-  let cantidad = Number($cajaCantidad.textContent)
+  let cantidad = Number($cajaCantidad.textContent);
   $cajaCantidad.textContent =  cantidad+1;
 }
 function decrementar(index){
@@ -138,7 +138,36 @@ function decrementar(index){
 }
 
 function agregarAlCarrito(index){
-  let $cajaCantidad = document.getElementById(index);
+  let cantidad = Number(document.getElementById(index).textContent);
+
+  const productosAlm = productosAlmacen.getProductos()[index];
+  let {nombre,precio} = productosAlm;
+
+  const carrito = carritoDeCompras.getProductosCarrito();
+  console.log(carrito.length)
+
+  //Saber si ya existe el producto en el carrito!
+  let existe = false;
+  
+  carrito.forEach((e,i)=>{
+    if(e.nombre == nombre){
+      existe = true;
+      carritoDeCompras.editCantProducto(i,cantidad)
+      return
+    }
+  });
+  
+  if(!existe){
+    let newProducto = new ProductoCarrito(nombre,precio,cantidad)
+    carritoDeCompras.addProductoCarrito(newProducto)
+  }
+
+  console.log(carritoDeCompras.getProductosCarrito())
+
+  
+  
+  
+
 
 };
 

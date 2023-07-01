@@ -14,50 +14,59 @@
 </head>
 <body>
 
-  <h1>Carrito de compras</h1>
+  <header>
+    <h1>Carrito de compras</h1>
+    <img src="img/carrito-de-compras.png" alt="">
+  </header>
   
+  <main>
+    <section class="tableProducts" id="table-products">
+      <table class="table table-bordered">
+        <thead style="text-align:center">
+          <tr>
+            <th scope="col" class="col-3">Producto</th>
+            <th scope="col" class="col-4">Descripción</th>
+            <th scope="col" class="col-2">Precio</th>
+            <th scope="col" class="col-1">Cantidad</th>
+            <th scope="col" class="col-2">Agregar al carrito</th>
+          </tr>
+        </thead>
+        <tbody id="productos">
+          <!--Se llena de forma dinámica-->
+          <tr>
+            <td>
+              <div class="producto">
+                <img src="https://cdn-icons-png.flaticon.com/512/75/75472.png" class="imgProducts" alt="...">
+                <p>Nintendo</p>
+              </div>
+  
+            </td>
+            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit!</td>
+            <td> 10 </td>
+            <td>
+              <div class="btnIncrementar">
+                <button id="btn-menos" onclick="incrementar()">-</button>
+                <p id="cantidad">0</p>
+                <button id="btn-mas">+</button>
+              </div> 
+             
+            </td>
+            <td>
+              <button type="button" class="btn btn-success carrito">
+                <i class="bi bi-cart4"></i>
+              </button>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
 
-  <section class="tableProducts" id="table-products">
-    <table class="table table-bordered">
-      <thead style="text-align:center">
-        <tr>
-          <th scope="col" class="col-3">Producto</th>
-          <th scope="col" class="col-4">Descripción</th>
-          <th scope="col" class="col-2">Precio</th>
-          <th scope="col" class="col-1">Cantidad</th>
-          <th scope="col" class="col-2">Agregar al carrito</th>
-        </tr>
-      </thead>
-      <tbody id="productos">
-        <!--Se llena de forma dinámica-->
-        <tr>
-          <td>
-            <div class="producto">
-              <img src="https://cdn-icons-png.flaticon.com/512/75/75472.png" class="imgProducts" alt="...">
-              <p>Nintendo</p>
-            </div>
+    <section class="compra">
 
-          </td>
-          <td>Lorem ipsum dolor sit amet consectetur adipisicing elit!</td>
-          <td> 10 </td>
-          <td>
-            <div class="btnIncrementar">
-              <button id="btn-menos" onclick="incrementar()">-</button>
-              <p id="cantidad">0</p>
-              <button id="btn-mas">+</button>
-            </div> 
-           
-          </td>
-          <td>
-            <button type="button" class="btn btn-success carrito">
-              <i class="bi bi-cart4"></i>
-            </button>
-          </td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </section>
+    </section>
+  </main>
+  
  
 
   <footer>©Margie Bocanegra</footer>
