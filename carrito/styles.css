@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+h4{
+    text-align: center;
+    
+
+}
 body{
     min-height: 100vh;
     margin: 0;
@@ -20,35 +25,70 @@ header{
     padding: 10px;
 
     color: #4f0450;
+    justify-content: flex-end;
+
+    height: 10vh;
 }
 
 main{
-    display: flex;
+    display: flex;    
+    height: 83vh;
 }
 
 .tableProducts{
     margin-left: auto;
     margin-right: auto;
 
-    width:50%;
-    
+    width:60%;
+    overflow-y: scroll;
 }
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+/* Track */
+::-webkit-scrollbar-track {
+background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555; 
+}
+
+thead tr th{ 
+    position: sticky;
+    top: 0;
+}
+
 .compra{
-    width: 50%;
-    background-color: #f7cbf8;
+    width: 40%;
+    overflow-y: scroll;
 }
+
+
 .imgProducts{
     height: 15vh;
 }
-td{
+th, .tr{
     vertical-align: middle;
     text-align: center;
 }
+
+
 .btnIncrementar{
     display: flex;
     justify-content: center;
 }
-#cantidad{
+.cantidad{
     width: 30px;
     height: 20px;
     text-align: center;
@@ -68,6 +108,13 @@ td{
     flex-direction: column;
 }
 
+/*Compra*/
+
+#productos-seleccionados{
+    width: 90%;
+    margin: auto;
+}
+
 
 footer {
     color: white;
@@ -83,3 +130,34 @@ footer {
     justify-content: space-around;
    
 }
+
+@media (max-width: 885px) {
+    main{
+        display: flex;
+        flex-direction: column-reverse;   
+    }
+
+    .tableProducts{
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        
+        height: 45vh;
+        width:90%;
+        overflow-y: scroll;
+    }
+
+    .compra{
+        width: 90%;
+        height: 40vh;
+
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+  }
+
+  .hidden{
+    display: none;
+  }

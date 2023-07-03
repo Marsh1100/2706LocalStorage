@@ -48,7 +48,10 @@ class CarritoDeCompras{
     this.carrito[index].cantidad += cantidad
   }
   removeProducto(index){
-    this.carrito.splice(index,1);
+    this.carrito[index].cantidad -=1;
+    if(this.carrito[index].cantidad==0){
+      this.carrito.splice(index,1);
+    }
   }
 
   getProductosCarrito(){
@@ -73,20 +76,40 @@ productosAlmacen.addProducto(new ProductoAlmacen("Casa de los Sueños de Barbie 
 productosAlmacen.addProducto(new ProductoAlmacen("Pista Anti-Gravity Slot Track - Hot Wheels",
 "https://pepeganga.vtexassets.com/arquivos/ids/832199/100458020-1.png?v=638028359622430000",
 "La pista de juguete Anti-Gravity Slot Track, incluye 2 mini vehículos 2 controladores inalámbricos y contador de vueltas.",280000))
-
+productosAlmacen.addProducto(new ProductoAlmacen("Figura Spidey And His",
+"https://pepeganga.vtexassets.com/arquivos/ids/666390/10010737703-1.png?v=637737937812300000",
+" Spidey and His Amazing Friends sigue las aventuras del superhéroe Spidey y todos sus heroicos amigos, los cuales tienen todos súper poderes de araña, sentido arácnido, súper fuerza y más",
+35000));
 
 
 //Elementos del DOM
 const $productosTabla =  document.getElementById("productos");
+const $productosCompra = document.getElementById("carrito");
 
-
+const $seccionCompra  = document.getElementById("compra");
 //AddEventListener
+document.addEventListener("DOMContentLoaded",function(){
+  if(carritoDeCompras.getProductosCarrito().length > 0){
+    $seccionCompra.style.display = "block";
+  }
+});
 
+document.addEventListener('DOMContentLoaded',function(){
+  let carrito = JSON.parse(localStorage.getItem('carritoDeCompras')) || carritoDeCompras.getProductosCarrito();
+  if (carrito.length != 0){
+    carritoDeCompras.carrito=[];
+    carrito.forEach(e=>{
+      carritoDeCompras.addProductoCarrito(e);
+    })
+  }
+  renderCarritoCompra();
+});
 
-//Funciones
-generarIdUnico = () => { 
-  return Math.random().toString(30).substring(2);           
-} 
+function addlocalStorage(carritoDeCompras){
+  localStorage.setItem('carritoDeCompras', JSON.stringify(carritoDeCompras));
+};
+
+//Funciones 
 function renderProductosTabla(){
   $productosTabla.innerHTML=" ";
   const productosAlm = productosAlmacen.getProductos();
@@ -94,7 +117,7 @@ function renderProductosTabla(){
   productosAlm.forEach((e,index)=>{
     const {nombre,img,descripcion,precio} = e;
 
-    let html = `<tr>
+    let html = `<tr class="tr">
                   <td>
                     <div class="producto">
                       <img src="${img}" class="imgProducts" alt="...">
@@ -107,7 +130,7 @@ function renderProductosTabla(){
                   <td>
                     <div class="btnIncrementar">
                       <button id="btn-menos" onclick="decrementar(${index})">-</button>
-                      <p id="${index}">1</p>
+                      <p class="cantidad" id="${index}">1</p>
                       <button id="btn-mas" onclick="incrementar(${index})">+</button>
                     </div> 
                     
@@ -121,6 +144,42 @@ function renderProductosTabla(){
 
     $productosTabla.insertAdjacentHTML('beforeend',html);
   })
+}
+
+function renderCarritoCompra(){
+  $productosCompra.innerHTML=" ";
+  const carritoCompra = carritoDeCompras.getProductosCarrito();
+  let total= 0;
+  carritoCompra.forEach((e,index)=>{
+    const {nombre,cantidad,precio} = e;
+    console.log(cantidad);
+    let subtotal = cantidad*precio.toFixed(3);
+    total += subtotal;
+    let html = `<tr>
+                <td>${nombre}</td>
+                <td  class="tr">${cantidad}</td>
+                <td  class="tr">$${subtotal}</td>
+                <td class="tr">
+                  <button  class="btn btn-danger" onclick="removeProducto(${index})"><i class="bi bi-trash-fill"></i></button>
+                </td>
+              </tr>`;
+    $productosCompra.insertAdjacentHTML('beforeend', html);
+  })
+  let html2 =`<tr>
+              <td  class="border border-0"></td>
+              <td class="tr border border-0"><b>TOTAL</b></td>
+              <td class="tr border border-0">$${total}</td>
+              
+            </tr>`
+    $productosCompra.insertAdjacentHTML('beforeend', html2);
+
+  addlocalStorage(carritoCompra);
+
+  if(carritoCompra.length>0){
+    $seccionCompra.style.display = "block";
+  }else{
+    $seccionCompra.style.display = "none";
+  }
 }
 renderProductosTabla();
 
@@ -144,7 +203,6 @@ function agregarAlCarrito(index){
   let {nombre,precio} = productosAlm;
 
   const carrito = carritoDeCompras.getProductosCarrito();
-  console.log(carrito.length)
 
   //Saber si ya existe el producto en el carrito!
   let existe = false;
@@ -161,15 +219,17 @@ function agregarAlCarrito(index){
     let newProducto = new ProductoCarrito(nombre,precio,cantidad)
     carritoDeCompras.addProductoCarrito(newProducto)
   }
-
-  console.log(carritoDeCompras.getProductosCarrito())
-
-  
-  
-  
-
+  console.log(carritoDeCompras.getProductosCarrito());
+  document.getElementById(index).textContent = 1;
+  renderCarritoCompra();
 
 };
+
+function removeProducto(index){
+  carritoDeCompras.removeProducto(index);
+  renderCarritoCompra();
+}
+
 
 // Obtener los elementos del carrito del Local Storage al cargar la página
 /*var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
